@@ -1,0 +1,14 @@
+# For Backend DJANGO
+install Django
+install Django Restframework
+install Django Restframework Simple JWT
+install Django Corsheaders
+install Django Jazzmin
+install python dot env
+install pillow
+
+# For Fronyend REACT
+npm Install axios
+npm Install react router dom
+npm Install material ui
+npm install jwt-decode
