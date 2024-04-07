@@ -8,7 +8,6 @@ import uuid
 # Create Your Signals Here 
 
 
-
 # Creates a User Profile Once a User is Created
 @receiver(post_save, sender=User) 
 def create_profile(sender, instance, created, **kwargs):
@@ -68,7 +67,7 @@ post_save.connect(create_folder, sender=Folder)
 
 
 # Updates the File Activity On Save
-@receiver(pre_save, sender=Folder) 
+@receiver(post_save, sender=Folder) 
 def save_folder(sender, created, instance, **kwargs):
     if created == True:
         FolderActivity.objects.create(update='Edit', folder=instance)

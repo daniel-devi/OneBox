@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api.js";
-import { authToken } from "../api.js";
 import "./File.css";
 
 export default function File() {
   const [files, setFiles] = useState([]);
-  const [fileInput, setFileInput] = useState([]);
+  const [fileInput, setFileInput] = useState("");
+  const [userName, setUserName] = useState("");
 
-  // Fetch Notes On load
+  /// Fetch Notes On load
   useEffect(() => {
     getFiles();
   }, []);
 
-  ///Get Files ///////////////
+  /// Get Files ///////////////
   const getFiles = () => {
     api
       .get("/api/file")
@@ -24,21 +24,46 @@ export default function File() {
       })
       .catch((err) => alert(err));
   };
-  //Create File ///////////////////////////////
-  const CreateFile = (file) => {
+
+  /// Get USer ///////////////////
+  const getUser = () => {
+    let user = files.map((userFile) => userFile.user);
     api
-      .post("/api/file/create", {"user": authToken,"file": file })
-      .then((res) => {
-        if (res.status === 201) alert("Note created!");
-        else alert("Failed to make note.");
-        getFiles();
+      .get(`/api/user/details/${user}`)
+      .then((res) => res.data)
+      .then((data) => {
+        let name = data[0].username;
+        setUserName(name);
       })
       .catch((err) => alert(err));
   };
+
   // Convert Date //////////////////////////
   const convertToRegularTime = (timestamp) => {
     const date = new Date(timestamp);
     return date.toLocaleString();
+  };
+
+  //Create File ///////////////////////////////
+  const CreateFile = (e) => {
+    console.log(fileInput);
+    const formData = new FormData();
+    formData.append('file', fileInput[0]);
+    console.log(formData)
+    e.preventDefault();
+    setTimeout(() => {
+      api
+        .post("/api/file/create", { FormData, user: userName })
+        .then((res) => {
+          if (res.status === 201) {
+            alert("Note created!");
+            getFiles();
+          } else {
+            alert("Failed to make note.");
+          }
+        })
+        .catch((err) => console.log(err));
+    }, 2000);
   };
 
   /// Delete File /////////////////////////////////
@@ -113,7 +138,7 @@ export default function File() {
         } catch (error) {
           console.error("Error fetching data:", error);
         }
-      }, 500); // 3.5 seconds in milliseconds
+      }, 500); // 0.5 seconds in milliseconds
 
       return () => clearTimeout(delayedCall); // Clear timeout on component unmount
     };
@@ -188,10 +213,11 @@ export default function File() {
               <span id="file-name">
                 {file.file_name}
                 <h1>:</h1>
+                <span><embed src={file.file} type="" /></span>
               </span>
 
               <span>{file.favorite === true ? "🌟" : "⭐"}</span>
-              <div className="file"></div>
+              <div className="file" style={{ display: "none" }}></div>
               <small>Created: {convertToRegularTime(file.date_created)}</small>
               <br />
               <small>Edited: {convertToRegularTime(file.date_updated)}</small>
@@ -207,7 +233,7 @@ export default function File() {
             <p>No files available</p>
           </div>
         )}
-        <form className="add-file" onSubmit= {()=> CreateFile(fileInput)}>
+        <form className="add-file" onSubmit={CreateFile}>
           <label htmlFor="images" className="drop-container" id="dropcontainer">
             <span className="drop-title">Drop files here</span>
             or
@@ -217,11 +243,10 @@ export default function File() {
               accept="image/*"
               required
               onChange={(e) => setFileInput(e.target.value)}
+              onClick={getUser}
             />
           </label>
-          <button className="btn btn-primary" type="submit">
-            Button
-          </button>
+          <button className="btn btn-primary">Button</button>
         </form>
       </div>
     </>

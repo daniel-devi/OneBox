@@ -10,8 +10,8 @@ from rest_framework import serializers
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "username", "password"]
-        extra_kwargs = {"password": {"write_only": True}}
+        fields = ["id", "username", "password", "first_name", "last_name", "date_joined"]
+        extra_kwargs = {"password": {"write_only": True}, "date_joined": {"read_only": True}}
 # Create User Function
 
     def create(self, validated_data):
@@ -24,7 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = File
-        fields = ["id","user","file", "uid", "file_name", "folder", "favorite", "date_created", "date_updated"]
+        fields = ["file","id","user", "uid", "file_name", "folder", "favorite", "date_created", "date_updated"]
         extra_kwargs = {"date_created": {"read_only": True}, }
     
     def get_file_path(self, obj):

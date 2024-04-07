@@ -52,6 +52,10 @@ small {
   background-color: #ff0000c9;
   color: white;
   transition: padding 200ms linear;
+  -webkit-transition: padding 200ms linear;
+  -moz-transition: padding 200ms linear;
+  -ms-transition: padding 200ms linear;
+  -o-transition: padding 200ms linear;
 }
 
 #delete:hover{
@@ -164,15 +168,7 @@ input[type=file] {
     outline: 0;
    }
    
-   button span {
-    background-color: rgb(5, 6, 45);
-    padding: 16px 24px;
-    border-radius: 6px;
-    width: 100%;
-    height: 100%;
-    transition: 300ms;
-   }
-   
+ 
    button:hover span {
     background: none;
    }

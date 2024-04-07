@@ -11,6 +11,8 @@ from django.http import Http404, JsonResponse
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import authentication, permissions
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
 
@@ -21,11 +23,27 @@ class CreateUserView(generics.CreateAPIView):
     permission_classes = [AllowAny]
     
 
+# User Detail
+class UserView(generics.ListAPIView):
+    serializer_class = UserSerializer
+    
+    def get_queryset(self):
+        search_name = self.kwargs['ids']
+        return User.objects.filter(id__icontains=search_name)
+    
+
 # File Create View
 class FileCreateView(generics.CreateAPIView):
-    queryset = File.objects.all()
-    serializer_class = FileSerializer
-    permission_classes = [AllowAny]
+    parser_classes = [MultiPartParser, FormParser]
+    permission_classes =[IsAuthenticated]
+    
+    def post(self, request, format=None):
+        serializer = FileSerializer(data=request.data, instance=request.user)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
 # File Delete View

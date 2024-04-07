@@ -5,6 +5,7 @@ from .views import *
 # Create Urls Here
 
 urlpatterns = [
+    path('user/details/<int:ids>', UserView.as_view()),
     path('file', FileView.as_view() ),
     path('file/create', FileCreateView.as_view()),
     path('file/delete/<uuid:uid>', FileDeleteView.as_view()),

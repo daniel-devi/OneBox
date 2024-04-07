@@ -87,6 +87,7 @@ function AuthForm({ route, method }) {
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
           id={errorStyle}
+          required= "true"
         />
         <input
           className="form-input"
@@ -95,6 +96,7 @@ function AuthForm({ route, method }) {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           id={errorStyle}
+          required= "true"
         />
         <span id="error">{errorMessage}</span>
         {loading && <LoadingIndicator />}
