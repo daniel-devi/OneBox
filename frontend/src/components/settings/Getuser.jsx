@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../api";
+import "./Getuser.css";
 
 export default function GetUser() {
   const [userData, setUserData] = useState([]);
@@ -29,7 +30,7 @@ export default function GetUser() {
       .then((res) => res.data)
       .then((data) => {
         setUserData(data[0]);
-        getUserProfile()
+        getUserProfile();
       })
       .catch((err) => alert(err));
   };
@@ -40,27 +41,50 @@ export default function GetUser() {
       .get(`/api/profile/${userId}`)
       .then((res) => res.data)
       .then((data) => {
-       console.log(data)
-       setUserProfile(data[0].profile_picture)
+        setUserProfile(data[0]);
       })
       .catch((err) => alert(err));
   };
 
   useEffect(() => {
-    console.log(userData); // Log user data when it updates
+    console.log(); // Log user data when it updates
   }, [userData]);
 
   useEffect(() => {
-    console.log(userProfile); // Log user Profile when it updates
+    console.log(); // Log user Profile when it updates
   }, [userProfile]);
   return (
-    <div>
-      <p>Profile Pic <img src={userProfile} alt="" /></p>
-      <p>Username: {userData.username}</p>
-      <p>First Name: {userData.firstName}</p>
-      <p>Last Name: {userData.lastName}</p>
-      <p>Email {userData.email}</p>
-      <p>Date Joined: {userData.dateJoined}</p>
-    </div>
+    <>
+      {/* Hello world */}
+      <div className="container mt-4 mb-4 p-3 d-flex justify-content-center box">
+        <div className="card p-4">
+          <div className=" image d-flex flex-column justify-content-center align-items-center">
+            <button className="btn btn-secondary">
+              <img src={userProfile.profile_picture} height={100} width={100} />
+            </button>
+            <span className="name mt-3">
+              {userData.first_name} {userData.last_name}
+            </span>
+            <span className="idd">@{userData.username}</span>
+            <div className="d-flex flex-row justify-content-center align-items-center gap-2">
+              <span className="idd1">Oxc4c16a645_b21a</span>
+              <span className="idd1">Email: {userData.email}</span>
+              <span>
+                <i className="fa fa-copy" />
+              </span>
+            </div>
+            <div className="d-flex flex-row justify-content-center align-items-center mt-3"></div>
+            <div className=" d-flex mt-2">
+              <button className="btn1 btn-dark">Edit Profile</button>
+            </div>
+            <div className="text mt-3">
+              <span>{userProfile.bio}.</span>
+            </div>
+
+            <span className="join">Joined {userData.date_joined}</span>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

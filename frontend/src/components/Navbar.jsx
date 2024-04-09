@@ -8,7 +8,7 @@ import api from "./api.js";
 export default function Navbar({ search, dashboard, searchFun }) {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState("");
-  let [searchResult, setSearchResult]= useState([])
+  let [searchResult, setSearchResult] = useState([]);
 
   ///////////////
   function handleReturnHomeClick() {

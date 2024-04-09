@@ -48,8 +48,8 @@ export default function File() {
   const CreateFile = (e) => {
     console.log(fileInput);
     const formData = new FormData();
-    formData.append('file', fileInput[0]);
-    console.log(formData)
+    formData.append("file:", fileInput[0]);
+    console.log(formData);
     e.preventDefault();
     setTimeout(() => {
       api
@@ -217,7 +217,9 @@ export default function File() {
               <span id="file-name">
                 {data.file_name}
                 <h1>:</h1>
-                <span><embed src={`"http://127.0.0.1:8000"${data.file}`} type="" /></span>
+                <span>
+                  <embed src={`"http://127.0.0.1:8000"${data.file}`} type="" />
+                </span>
               </span>
 
               <span>{data.favorite === true ? "🌟" : "⭐"}</span>
@@ -250,9 +252,125 @@ export default function File() {
               onClick={getUser}
             />
           </label>
-          <button className="btn btn-primary">Button</button>
+          <button className="btn">Button</button>
         </form>
       </div>
+
+      <>
+        <div className="background" />
+        <div id="curve" className="card">
+          <div className="footer">
+            <div className="connections">
+              <div className="connection like">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABy0lEQVR4nO2WSytFURiGH4SS68HouEb+gglDhi45/4ABCr8CEwN+CBEDIYlyLffCwN0plzKiKNpa9ardOftysHcMvLXa9X3v977rW3vvtRb845eRBsSACSAOvADnwCTQoryd2wpMifOimnGgI4HriXJgHbA8xiJQJu6SD3dNPF/TuAougG7FMvUcAB6Uv9KwFOtP4PYAl8rHvczTbJ3OA/kuvAiwYutoWTEnGI0F8Vbdlj1m69TN9BN5muQGkOvDzbd1bt55EiaUNMsbNHqlbT64JNwoWRGCcZW0jUcSXpXMCsE4W9rGIwl3IXZcKe1bp+Sckp0hGHdJe9YpOaDk/ld2mxSQDhxIu8+JYP7FZxHaAjRul+YTUORGGhLpBMgJwDRHWhYw6LcxnIk4GoDxmLTOpO2JRuBdo+kHps3SeAMaUi0a1kwfgbpvmNap1tLrSxkZwIwKjz0OASdEVGNqp6X1JZjNf1cCO0BxCjWFwKZqDoECvokocCqhbR/zYnEs1ZjaH6FCVxpLK1DiwDH/55btglBNQKjVOW2E9xK6iWq3szTBGgJGue2juQbqNa4VO9I9LBREXC535lpTSsjIBkaAex2lI4r942/iA8sUk7Pv/epZAAAAAElFTkSuQmCC" />
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB70lEQVR4nO2Yv0sdQRSFvydGicFCiUIKwTaJ8a9IoRHSJY19EGxEAum1sbaKgZSaQKzsFAUhahOIGn9AgggWARWxM+EJccLALR6LqzM7s+9dYT44zbLvzjlvZ3ZmLyQSiUQikfDmHjAIvAe2gWOgChwBX4EJoM+hTp/cuya/rUqtLak9IGNFpwK8Bn4BxkHLwONr6jwBVhxr/AReydhRuA98chy8VpfAWE2dcbnmW2dWPASH2CgweK3sFJoMrLEeEsY+0rlAAzH1peg0G1Zg3mRk16kXLcChAuMmowPx5sxLBaZNjoZ8gnxUYNjk6INPkB0Fhk2O7KbpzJkCwyZHpz5Bimxc9dKlT5BzBYZNjuxscWZPgWGTI7t+nfmswLDJkT1tODOqwLDJ0YhPkF7gSoFpk9E/oAdPlhUYNxktUoAXCoybjOyXYyHWFJg3olUCeKZkc6wCTwnknYIgb4lApeA3eyzNx2xAPAA2GxBiE2gjMt3AjzqG2AceURIdwLc6PYmHlEynvArLCrEif1hdaAamSwgxU1ar9DbsAe5PhAC2xhsajO3xfg8IsQv0o4RWYEpOp64BrmQqBfd1y+A58NshxIlvf6oRdAELN4RYKnN/iE1FFu9FTYC/cm5r4g7SL42MPU0LuijtokQikSCY/wtr6za2rYeWAAAAAElFTkSuQmCC" />
+              </div>
+              <div className="connection delete">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0px"
+                  y="0px"
+                  width="200"
+                  height="200"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M 10 2 L 9 3 L 3 3 L 3 5 L 21 5 L 21 3 L 15 3 L 14 2 L 10 2 z M 4.3652344 7 L 6.0683594 22 L 17.931641 22 L 19.634766 7 L 4.3652344 7 z"></path>
+                </svg>
+              </div>
+              <div className="connection behance">
+                <div className="icon" />
+              </div>
+              <div className="connection behance">
+                <div className="icon" />
+              </div>
+            </div>
+            <svg id="curve">
+              <path
+                id="p"
+                d="M0,200 Q80,100 400,200 V150 H0 V50"
+                transform="translate(0 300)"
+              />
+              <rect
+                id="dummyRect"
+                x={0}
+                y={0}
+                height={450}
+                width={400}
+                fill="transparent"
+              />
+              {/* slide up*/}
+              <animate
+                xlinkHref="#p"
+                attributeName="d"
+                to="M0,50 Q80,100 400,50 V150 H0 V50"
+                fill="freeze"
+                begin="dummyRect.mouseover"
+                end="dummyRect.mouseout"
+                dur="0.1s"
+                id="bounce1"
+              />
+              {/* slide up and curve in */}
+              <animate
+                xlinkHref="#p"
+                attributeName="d"
+                to="M0,50 Q80,0 400,50 V150 H0 V50"
+                fill="freeze"
+                begin="bounce1.end"
+                end="dummyRect.mouseout"
+                dur="0.15s"
+                id="bounce2"
+              />
+              {/* slide down and curve in */}
+              <animate
+                xlinkHref="#p"
+                attributeName="d"
+                to="M0,50 Q80,80 400,50 V150 H0 V50"
+                fill="freeze"
+                begin="bounce2.end"
+                end="dummyRect.mouseout"
+                dur="0.15s"
+                id="bounce3"
+              />
+              {/* slide down and curve out */}
+              <animate
+                xlinkHref="#p"
+                attributeName="d"
+                to="M0,50 Q80,45 400,50 V150 H0 V50"
+                fill="freeze"
+                begin="bounce3.end"
+                end="dummyRect.mouseout"
+                dur="0.1s"
+                id="bounce4"
+              />
+              {/* curve in */}
+              <animate
+                xlinkHref="#p"
+                attributeName="d"
+                to="M0,50 Q80,50 400,50 V150 H0 V50"
+                fill="freeze"
+                begin="bounce4.end"
+                end="dummyRect.mouseout"
+                dur="0.05s"
+                id="bounce5"
+              />
+              <animate
+                xlinkHref="#p"
+                attributeName="d"
+                to="M0,200 Q80,100 400,200 V150 H0 V50"
+                fill="freeze"
+                begin="dummyRect.mouseout"
+                dur="0.15s"
+                id="bounceOut"
+              />
+            </svg>
+            <div className="info">
+              <div className="name">Filan Fisteku</div>
+              <div className="job">Architect Manager</div>
+            </div>
+          </div>
+          <div className="card-blur" />
+        </div>
+      </>
     </>
   );
 }

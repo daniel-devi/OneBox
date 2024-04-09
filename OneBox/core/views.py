@@ -41,7 +41,7 @@ class UserProfileView(generics.ListAPIView):
     
 
 # File Create View
-class FileCreateView(generics.CreateAPIView):
+class FileCreateView(APIView):
     parser_classes = [MultiPartParser, FormParser]
     permission_classes =[IsAuthenticated]
     

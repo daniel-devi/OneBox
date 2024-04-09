@@ -22,7 +22,7 @@ class UserSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta :
         model = Profile
-        fields = ["profile_picture"]
+        fields = ["bio","profile_picture"]
     
     
 # File Model Serializer Class {A Api Format of the Model}
