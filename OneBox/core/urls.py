@@ -6,7 +6,9 @@ from .views import *
 
 urlpatterns = [
     path('user/details/<int:ids>', UserView.as_view()),
+    path('profile/<str:user>', UserProfileView.as_view()),
     path('file', FileView.as_view() ),
+    path('file/first', FileView.as_view() ),
     path('file/create', FileCreateView.as_view()),
     path('file/delete/<uuid:uid>', FileDeleteView.as_view()),
     path('search/file/<str:search>', FilesSearchView.as_view()),

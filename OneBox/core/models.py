@@ -8,9 +8,14 @@ import uuid
 # Create your models here.
     
 # A Profile Model
+
+def user_profile_image_directory_path(instance, filename): ## Profile Save Directory
+    # file will be uploaded to MEDIA_ROOT/user_name/<filename>
+    return "Profile-Images/user_{0}/{1}".format(instance.user.username, filename)
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to='Profile-Image/', default='', null=True, blank=True)
+    profile_picture = models.ImageField(upload_to=user_profile_image_directory_path, default='default/image.png', null=True, blank=True)
     bio = models.CharField(max_length=450, blank=True, null=True)
 
     # Return the Name of Each Object as {User-Username} Profile
@@ -37,7 +42,7 @@ class Folder(models.Model):
 # File Model  
 def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_name/<filename>
-    return "user_{0}/{1}".format(instance.user.username, filename)
+    return "User_Files/user_{0}/{1}".format(instance.user.username, filename)
 
 def file_name(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_name/<filename>

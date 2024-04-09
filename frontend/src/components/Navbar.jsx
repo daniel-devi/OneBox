@@ -24,6 +24,10 @@ export default function Navbar({ search, dashboard, searchFun }) {
   function handleGotoDashboardPageClick() {
     navigate("/dashboard");
   }
+  ////////////////////
+  function handleGotoSettingsPageClick() {
+    navigate("/settings");
+  }
   //////////////////////
   function CheckUser() {
     const [isAuthorized, setIsAuthorized] = useState(null);
@@ -84,9 +88,9 @@ export default function Navbar({ search, dashboard, searchFun }) {
         <div className="links">
           <a onClick={handleReturnHomeClick}>Home</a>
 
-          <a>Files</a>
+          <a>Folder</a>
 
-          <a>Settings</a>
+          <a onClick={handleGotoSettingsPageClick}>Settings</a>
         </div>
 
         {search === "search" ? <Search /> : ""}

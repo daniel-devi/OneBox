@@ -5,7 +5,7 @@ import "./File.css";
 
 export default function File() {
   const [files, setFiles] = useState([]);
-  const [fileInput, setFileInput] = useState("");
+  const [fileInput, setFileInput] = useState([]);
   const [userName, setUserName] = useState("");
 
   /// Fetch Notes On load
@@ -95,6 +95,10 @@ export default function File() {
     ////////////////
     function handleGotoDashboardPageClick() {
       navigate("/dashboard");
+    }
+
+    function handleSettingsPageClick() {
+      navigate("/settings");
     }
     //////////////////////
     function CheckUser() {
@@ -187,9 +191,9 @@ export default function File() {
           <div className="links">
             <a onClick={handleReturnHomeClick}>Home</a>
 
-            <a>Files</a>
+            <a>Folder</a>
 
-            <a>Settings</a>
+            <a onClick={handleSettingsPageClick}>Settings</a>
           </div>
 
           {search === "search" ? <Search /> : ""}
@@ -208,22 +212,22 @@ export default function File() {
           <a></a>
         </div>
         {files.length > 0 ? (
-          files.map((file) => (
-            <div className="file-list" key={file.uid}>
+          files.map((data) => (
+            <div className="file-list" key={data.uid}>
               <span id="file-name">
-                {file.file_name}
+                {data.file_name}
                 <h1>:</h1>
-                <span><embed src={file.file} type="" /></span>
+                <span><embed src={`"http://127.0.0.1:8000"${data.file}`} type="" /></span>
               </span>
 
-              <span>{file.favorite === true ? "🌟" : "⭐"}</span>
+              <span>{data.favorite === true ? "🌟" : "⭐"}</span>
               <div className="file" style={{ display: "none" }}></div>
-              <small>Created: {convertToRegularTime(file.date_created)}</small>
+              <small>Created: {convertToRegularTime(data.date_created)}</small>
               <br />
-              <small>Edited: {convertToRegularTime(file.date_updated)}</small>
+              <small>Edited: {convertToRegularTime(data.date_updated)}</small>
               <br />
               <br />
-              <small id="delete" onClick={() => deleteFile(file.uid)}>
+              <small id="delete" onClick={() => deleteFile(data.uid)}>
                 Delete
               </small>
             </div>
@@ -241,7 +245,7 @@ export default function File() {
               type="file"
               id="images"
               accept="image/*"
-              required
+              required={true}
               onChange={(e) => setFileInput(e.target.value)}
               onClick={getUser}
             />

@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from core.models import FileActivity,File,Folder
+from core.models import FileActivity,File,Folder,Profile
 # Restframework
 from rest_framework import serializers
     
@@ -10,7 +10,7 @@ from rest_framework import serializers
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "username", "password", "first_name", "last_name", "date_joined"]
+        fields = ["id", "username", "password", "first_name", "last_name", "email", "date_joined"]
         extra_kwargs = {"password": {"write_only": True}, "date_joined": {"read_only": True}}
 # Create User Function
 
@@ -18,6 +18,11 @@ class UserSerializer(serializers.ModelSerializer):
         print(validated_data)
         user = User.objects.create_user(**validated_data)
         return user
+    
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta :
+        model = Profile
+        fields = ["profile_picture"]
     
     
 # File Model Serializer Class {A Api Format of the Model}

@@ -31,6 +31,14 @@ class UserView(generics.ListAPIView):
         search_name = self.kwargs['ids']
         return User.objects.filter(id__icontains=search_name)
     
+# Profile Detail
+class UserProfileView(generics.ListAPIView):
+    serializer_class = UserProfileSerializer
+    
+    def get_queryset(self):
+        search_name = self.kwargs['user']
+        return Profile.objects.filter(user=search_name)
+    
 
 # File Create View
 class FileCreateView(generics.CreateAPIView):
@@ -69,6 +77,14 @@ class FileView(APIView):
     def get(self, request):
         file = File.objects.filter(user=request.user)
         serializer = FileSerializer(file, many=True)
+        return Response(serializer.data, status.HTTP_200_OK)
+
+# Only One Class
+class FileFirstView(APIView):
+    
+    def get(self, request):
+        file = File.objects.filter(user=request.user).first()
+        serializer = FileSerializer(file)
         return Response(serializer.data, status.HTTP_200_OK)
 
 

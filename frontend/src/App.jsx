@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import Setting from "./pages/Settings";
 // Dependencies Library
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
@@ -34,6 +35,14 @@ function App() {
               </ProtectedRoute>
             }
           ></Route>
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                <Setting />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<NotFound></NotFound>}></Route>
         </Routes>
       </BrowserRouter>
