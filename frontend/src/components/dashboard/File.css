@@ -68,6 +68,7 @@ p {
   font-size: 1rem;
   padding: 100px 0;
 }
+
 .add-file {
   display: flex;
   flex-direction: column;
@@ -76,7 +77,7 @@ p {
   padding: 5px;
   width: 250px;
   height: 250px;
-  background-color: #084cdf7a;
+  background-color: gray;
   border-radius: 4%;
   justify-content: center;
   align-content: center;
@@ -143,7 +144,6 @@ input[type="file"]::file-selector-button:hover {
   align-items: center;
   background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
   border: 0;
-  border-radius: 8px;
   box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
   box-sizing: border-box;
   color: #ffffff;
@@ -151,9 +151,6 @@ input[type="file"]::file-selector-button:hover {
   font-family: Phantomsans, sans-serif;
   font-size: 18px;
   justify-content: center;
-  line-height: 1em;
-  min-width: 100px;
-  max-width: 200px;
   padding: 3px;
   text-decoration: none;
   user-select: none;
@@ -164,6 +161,11 @@ input[type="file"]::file-selector-button:hover {
   transition: all 0.3s;
   text-align: center;
   margin: 0 auto;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 
 .btn:active,
@@ -181,153 +183,141 @@ input[type="file"]::file-selector-button:hover {
 
 
 
-
-
-
-
-
-
-html,
-body {
-    height: 100%;
-    width: 100%;
-}
-
 .background {
-    -webkit-filter: blur(30px);
-    filter: blur(30px);
+  -webkit-filter: blur(30px);
+  filter: blur(30px);
+  width: 100px;
+  width: 150px;
+  padding: 5px;
 }
+
 
 .card {
-    position: absolute;
-    border-radius: 8px;
-    height: 450px;
-    width: 400px;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    margin: auto;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    box-shadow: 0 0 80px -10px black;
-    overflow: hidden;
+  position: relative;
+  border-radius: 8px;
+  height: 300px;
+  width: 200px;
+  margin: auto;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 0 80px -10px black;
+  overflow: hidden;
 }
 
 .card-blur {
-    position: absolute;
-    height: 100%;
-    width: calc(100% + 1px);
-    background-color: black;
-    opacity: 0;
-    transition: opacity 0.15s ease-in;
+  position: absolute;
+  height: 100%;
+  width: calc(100% + 1px);
+  background-color: black;
+  opacity: 0;
+  transition: opacity 0.15s ease-in;
 }
 
 .card:hover .card-blur {
-    opacity: 0.6;
+  opacity: 0.6;
 }
 
 .footer {
-    z-index: 1;
-    position: absolute;
-    height: 80px;
-    width: 100%;
-    bottom: 0;
+  z-index: 1;
+  position: absolute;
+  height: 80px;
+  width: 100%;
+  bottom: 0;
 }
 
 svg#curve {
-    position: absolute;
-    fill: white;
-    left: 0;
-    bottom: 0;
-    width: 400px;
-    height: 450px;
+  position: absolute;
+  fill: white;
+  left: 0;
+  bottom: 0;
+  width: 400px;
+  height: 450px;
 }
 
 .connections {
-    height: 80px;
-    width: 400px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 100px;
-    margin: auto;
+  height: 80px;
+  width: 400px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 150px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }
 
 .connection {
-    height: 25px;
-    width: 25px;
-    border-radius: 100%;
-    background-color: white;
-    display: inline-block;
-    padding: 5px;
-    margin-right: 25px;
-    transform: translateY(200px);
-    
-    transition: transform 1s cubic-bezier(.46, 1.48, .18, .81);
+  position: relative;
+  bottom: 10px;
+  height: 25px;
+  width: 25px;
+  border-radius: 100%;
+  background-color: white;
+  display: inline-block;
+  padding: 2px;
+  margin-right: 20px;
+  transform: translateY(200px);
+  transition: transform 1s cubic-bezier(0.46, 1.48, 0.18, 0.81);
 }
 
 .card:hover .connection {
-    transform: translateY(0px);
+  transform: translateY(0px);
 }
 
 .info {
-	font-family: Inconsolata;
-    padding-left: 20px;
-    transform: translateY(250px);
-    
-    transition: transform 1s cubic-bezier(.31,1.21,.64,1.02);
+  font-family: Inconsolata;
+  position: relative;
+  bottom: 40px;
+  padding-left: 20px;
+  transform: translateY(250px);
+  transition: transform 1s cubic-bezier(0.31, 1.21, 0.64, 1.02);
+  -webkit-transition: transform 1s cubic-bezier(0.31, 1.21, 0.64, 1.02);
+  -moz-transition: transform 1s cubic-bezier(0.31, 1.21, 0.64, 1.02);
+  -ms-transition: transform 1s cubic-bezier(0.31, 1.21, 0.64, 1.02);
+  -o-transition: transform 1s cubic-bezier(0.31, 1.21, 0.64, 1.02);
 }
 
 .card:hover .info {
-    transform: translateY(0px);
+  transform: translateY(0px);
 }
 
 .name {
-    font-weight: bolder;
-    padding-top: 5px;
+  font-weight: bolder;
+  padding-top: 5px;
+  position: relative;
 }
 
 .job {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
-.connection.link {
-    height: 35px;
-    width: 35px;
-    margin-left: 20px;
-    padding: 0px;
-    border-radius: 100%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-  }
-
-  
-.connection.twitter {
-    transition-delay: 0.06s;
+.connection.like {
+  height: 35px;
+  width: 35px;
+  margin-left: 20px;
+  padding: 0px;
+  border-radius: 100%;
+  overflow: hidden;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
 }
 
-.connection.behance {
-  transition-delay: 0.12s;
+.like img {
+  width: 32px;
+  height: 30px;
 }
 
-.connection.twitter .icon {
-    height: 18px;
-    width: 18px;
-    margin-top: 4px;
-    margin-left: 4px;
-    background-position: center;
-    background-size: cover;
+.connection.delete {
+  transition-delay: 0.06s;
 }
 
-.connection.behance .icon {
-    height: 18px;
-    width: 18px;
-    margin-top: 3px;
-    margin-left: 4px;
-    background-position: center;
-    background-size: cover;
+.connection.folder {
+  transition-delay: 0.06s;
 }
 
+.connection.download {
+  transition-delay: 0.06s;
+}

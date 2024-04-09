@@ -23,7 +23,7 @@ class CreateUserView(generics.CreateAPIView):
     permission_classes = [AllowAny]
     
 
-# User Detail
+# User Detail View
 class UserView(generics.ListAPIView):
     serializer_class = UserSerializer
     
@@ -31,6 +31,13 @@ class UserView(generics.ListAPIView):
         search_name = self.kwargs['ids']
         return User.objects.filter(id__icontains=search_name)
     
+# Update User View
+class UpdateUserView(generics.UpdateAPIView):
+
+    queryset = User.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = UpdateUserSerializer    
+
 # Profile Detail
 class UserProfileView(generics.ListAPIView):
     serializer_class = UserProfileSerializer
@@ -39,6 +46,19 @@ class UserProfileView(generics.ListAPIView):
         search_name = self.kwargs['user']
         return Profile.objects.filter(user=search_name)
     
+# Change User Profile Picture
+class UserChangeProfileView(APIView):
+    serializer_class = UserProfileSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, request):
+        user_profile = Profile.objects.get(user=request.user)
+        profile_picture = request.data.get('profile_picture')
+        user_profile.profile_picture = profile_picture
+        user_profile.save()
+        return Response({'message': 'Profile picture updated successfully'}, status=status.HTTP_200_OK)
+    
+        
 
 # File Create View
 class FileCreateView(APIView):

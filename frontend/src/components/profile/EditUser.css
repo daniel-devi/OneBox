@@ -31,6 +31,22 @@
   transform: scale(1.5);
 }
 
+.profile-pic-edit {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.change-btn {
+  padding: 5px 7px;
+  margin: 5px 0;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
 .btn {
   height: 140px;
   width: 140px;
@@ -42,6 +58,21 @@
   font-weight: bold;
 }
 
+.name-update {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0;
+}
+
+.name-update label {
+  font-size: 1rem;
+  color: #000000b2;
+}
+
+.name-update input {
+  padding: 5px;
+}
+
 .idd {
   font-size: 14px;
   font-weight: 600;
@@ -49,6 +80,15 @@
 
 .idd1 {
   font-size: 12px;
+}
+
+.email {
+  display: flex;
+  margin: 10px 0;
+  flex-direction: column;
+}
+.email input{
+    padding: 5px;
 }
 
 .number {
@@ -93,4 +133,24 @@ hr .new1 {
 
 .date {
   background-color: #ccc;
+}
+
+.logout{
+    background-color: #FF0800;
+    color: white;
+    padding: 5px 7px ;
+    -webkit-box-shadow: -1px 3px 10.5px 12px #dddddd;
+    -moz-box-shadow: -1px 3px 10.5px 12px #dddddd;
+    box-shadow: -1px 3px 10.5px 12px #15151516;
+    transition: padding 0.5s;
+    -webkit-transition: padding 0.5s;
+    -moz-transition: padding 0.5s;
+    -ms-transition: padding 0.5s;
+    -o-transition: padding 0.5s;
+    margin: 5px 0 ;
+    border: none;
+}
+
+.logout:hover{
+    padding: 7px 10px;
 }

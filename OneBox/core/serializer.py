@@ -3,8 +3,8 @@ from core.models import FileActivity,File,Folder,Profile
 # Restframework
 from rest_framework import serializers
     
-    
 # Create Your Serializer
+
 
 # User Model Serializer Class {A Api Format of the Model}
 class UserSerializer(serializers.ModelSerializer):
@@ -19,11 +19,46 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         return user
     
+    
+# Update User Profile
+class UpdateUserSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+        extra_kwargs = {
+            'first_name': {'required': True},
+            'last_name': {'required': True},
+            'email': {'required': True},
+        }
+    # Custom validations
+    def validate_email(self, value): # Email Validation
+        user = self.context['request'].user
+        if User.objects.exclude(pk=user.pk).filter(email=value).exists():
+            raise serializers.ValidationError({"email": "This email is already in use."})
+        return value
+
+    # update
+    def update(self, instance, validated_data):
+        instance.first_name = validated_data['first_name']
+        instance.last_name = validated_data['last_name']
+        instance.email = validated_data['email']
+        instance.save()
+
+        return instance
+
+# User Profile Serializer
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta :
         model = Profile
         fields = ["bio","profile_picture"]
     
+# User Profile-Pic Serializer
+class UserProfilePictureSerializer(serializers.ModelSerializer):
+    class Meta :
+        model = Profile
+        fields = ["profile_picture"]
     
 # File Model Serializer Class {A Api Format of the Model}
 class FileSerializer(serializers.ModelSerializer):

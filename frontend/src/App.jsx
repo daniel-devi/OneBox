@@ -4,7 +4,8 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
-import Setting from "./pages/Settings";
+import Profile from "./pages/Profile";
+import ProfileEdit from "./pages/Profile-edit";
 // Dependencies Library
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
@@ -36,10 +37,18 @@ function App() {
             }
           ></Route>
           <Route
-            path="/settings"
+            path="/profile"
             element={
               <ProtectedRoute>
-                <Setting />
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile-edit"
+            element={
+              <ProtectedRoute>
+                <ProfileEdit />
               </ProtectedRoute>
             }
           />

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../api";
 import "./Getuser.css";
 
@@ -6,11 +7,17 @@ export default function GetUser() {
   const [userData, setUserData] = useState([]);
   const [userProfile, setUserProfile] = useState([]);
 
+  const navigate = useNavigate();
+
   let userId = "";
 
   useEffect(() => {
     getFiles();
   }, []);
+
+  function handleEditClick() {
+    navigate("/profile-edit");
+  }
 
   const getFiles = () => {
     api
@@ -67,7 +74,6 @@ export default function GetUser() {
             </span>
             <span className="idd">@{userData.username}</span>
             <div className="d-flex flex-row justify-content-center align-items-center gap-2">
-              <span className="idd1">Oxc4c16a645_b21a</span>
               <span className="idd1">Email: {userData.email}</span>
               <span>
                 <i className="fa fa-copy" />
@@ -75,7 +81,9 @@ export default function GetUser() {
             </div>
             <div className="d-flex flex-row justify-content-center align-items-center mt-3"></div>
             <div className=" d-flex mt-2">
-              <button className="btn1 btn-dark">Edit Profile</button>
+              <button className="btn1 btn-dark" onClick={handleEditClick}>
+                Edit Profile
+              </button>
             </div>
             <div className="text mt-3">
               <span>{userProfile.bio}.</span>

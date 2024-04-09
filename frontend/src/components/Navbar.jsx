@@ -25,8 +25,8 @@ export default function Navbar({ search, dashboard, searchFun }) {
     navigate("/dashboard");
   }
   ////////////////////
-  function handleGotoSettingsPageClick() {
-    navigate("/settings");
+  function handleGotoProfilePageClick() {
+    navigate("/profile");
   }
   //////////////////////
   function CheckUser() {
@@ -90,7 +90,7 @@ export default function Navbar({ search, dashboard, searchFun }) {
 
           <a>Folder</a>
 
-          <a onClick={handleGotoSettingsPageClick}>Settings</a>
+          <a onClick={handleGotoProfilePageClick}>Profile</a>
         </div>
 
         {search === "search" ? <Search /> : ""}

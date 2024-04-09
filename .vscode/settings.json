@@ -6,6 +6,7 @@
         "Phantomsans",
         "restframework",
         "simplejwt",
+        "Userid",
         "wwvt"
     ]
 }

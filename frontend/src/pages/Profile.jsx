@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import GetUser from "../components/settings/Getuser";
+import GetUser from "../components/profile/Getuser";
 import Navbar from "../components/Navbar";
 
-export default function Setting() {
+export default function Profile() {
   const navigate = useNavigate();
   function handleLogoutClick() {
     navigate("/logout");
@@ -18,9 +18,9 @@ export default function Setting() {
         crossOrigin="anonymous"
       />
       <Navbar dashboard={"dashboard"} />
-      <h2>Settings</h2>
+      <h2>Profile</h2>
       <GetUser />
-      <button onClick={handleLogoutClick}>Logout</button>
+      <button onClick={handleLogoutClick} className="logout">Logout</button>
     </div>
   );
 }

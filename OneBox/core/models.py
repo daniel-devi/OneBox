@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 # importing uuid 
 import uuid 
+# Import from Pillow
+from PIL import Image
 
 # Create your models here.
     
@@ -22,7 +24,19 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.user} Profile"
  
+    def save(self, *args, **kwargs):
+        # save the profile first
+        super().save(*args, **kwargs)
 
+        # resize the image
+        img = Image.open(self.avatar.path)
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            # create a thumbnail
+            img.thumbnail(output_size)
+            # overwrite the larger image
+            img.save(self.avatar.path)
+            
 # A Folder Model
 class Folder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
