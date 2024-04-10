@@ -75,8 +75,8 @@ p {
   row-gap: 10px;
   margin: 0;
   padding: 5px;
-  width: 250px;
-  height: 250px;
+  width: 300px;
+  height: 300px;
   background-color: gray;
   border-radius: 4%;
   justify-content: center;
@@ -196,10 +196,8 @@ input[type="file"]::file-selector-button:hover {
   position: relative;
   border-radius: 8px;
   height: 300px;
-  width: 200px;
+  width: 150px;
   margin: auto;
-  background-size: cover;
-  background-position: center;
   background-repeat: no-repeat;
   box-shadow: 0 0 80px -10px black;
   overflow: hidden;
@@ -241,7 +239,7 @@ svg#curve {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 150px;
+  bottom: 50px;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -255,10 +253,14 @@ svg#curve {
   border-radius: 100%;
   background-color: white;
   display: inline-block;
-  padding: 2px;
+  padding: 0;
   margin-right: 20px;
   transform: translateY(200px);
   transition: transform 1s cubic-bezier(0.46, 1.48, 0.18, 0.81);
+  -webkit-transform: translateY(200px);
+  -moz-transform: translateY(200px);
+  -ms-transform: translateY(200px);
+  -o-transform: translateY(200px);
 }
 
 .card:hover .connection {
@@ -276,6 +278,10 @@ svg#curve {
   -moz-transition: transform 1s cubic-bezier(0.31, 1.21, 0.64, 1.02);
   -ms-transition: transform 1s cubic-bezier(0.31, 1.21, 0.64, 1.02);
   -o-transition: transform 1s cubic-bezier(0.31, 1.21, 0.64, 1.02);
+  -webkit-transform: translateY(250px);
+  -moz-transform: translateY(250px);
+  -ms-transform: translateY(250px);
+  -o-transform: translateY(250px);
 }
 
 .card:hover .info {
@@ -288,14 +294,14 @@ svg#curve {
   position: relative;
 }
 
-.job {
+.created {
   margin-top: 10px;
 }
 
 .connection.like {
   height: 35px;
   width: 35px;
-  margin-left: 20px;
+  margin-left: 10px;
   padding: 0px;
   border-radius: 100%;
   overflow: hidden;

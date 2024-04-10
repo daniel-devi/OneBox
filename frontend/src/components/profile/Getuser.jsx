@@ -39,7 +39,7 @@ export default function GetUser() {
         setUserData(data[0]);
         getUserProfile();
       })
-      .catch((err) => alert(err));
+      .catch((err) => console.log(err));
   };
 
   // Get User Profile
@@ -62,7 +62,8 @@ export default function GetUser() {
   }, [userProfile]);
   return (
     <>
-      {/* Hello world */}
+      <h2>Profile</h2>
+
       <div className="container mt-4 mb-4 p-3 d-flex justify-content-center box">
         <div className="card p-4">
           <div className=" image d-flex flex-column justify-content-center align-items-center">

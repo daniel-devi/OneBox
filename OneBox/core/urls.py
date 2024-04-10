@@ -5,13 +5,14 @@ from .views import *
 # Create Urls Here
 
 urlpatterns = [
-    path('update_profile/<int:pk>/', UpdateUserView.as_view(), name='auth_update_profile'),
+    path('update_profile/<int:pk>/', UpdateUserView.as_view()),
     path('user/details/<int:ids>', UserView.as_view()),
     path('profile/<str:user>', UserProfileView.as_view()),
-    path('profile/change',  UserChangeProfileView.as_view()),
+    path('profile/change/<int:id>',  UserChangeProfileView.as_view()),
     path('file', FileView.as_view() ),
     path('file/first', FileView.as_view() ),
     path('file/create', FileCreateView.as_view()),
+    path('file/update/favorite/<uuid:uid>', FileFavoriteUpdateView.as_view()),
     path('file/delete/<uuid:uid>', FileDeleteView.as_view()),
     path('search/file/<str:search>', FilesSearchView.as_view()),
     path('folder', FolderView.as_view() ),

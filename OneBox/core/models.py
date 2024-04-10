@@ -29,13 +29,14 @@ class Profile(models.Model):
         super().save(*args, **kwargs)
 
         # resize the image
-        img = Image.open(self.avatar.path)
+        img = Image.open(self.profile_picture.path)
         if img.height > 300 or img.width > 300:
             output_size = (300, 300)
             # create a thumbnail
             img.thumbnail(output_size)
             # overwrite the larger image
-            img.save(self.avatar.path)
+            img.save(self.profile_picture.path)
+            
             
 # A Folder Model
 class Folder(models.Model):

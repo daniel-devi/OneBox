@@ -18,7 +18,6 @@ export default function Profile() {
         crossOrigin="anonymous"
       />
       <Navbar dashboard={"dashboard"} />
-      <h2>Profile</h2>
       <GetUser />
       <button onClick={handleLogoutClick} className="logout">Logout</button>
     </div>

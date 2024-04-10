@@ -48,18 +48,21 @@ class UserProfileView(generics.ListAPIView):
     
 # Change User Profile Picture
 class UserChangeProfileView(APIView):
-    serializer_class = UserProfileSerializer
-    permission_classes = [IsAuthenticated]
-    
-    def post(self, request):
-        user_profile = Profile.objects.get(user=request.user)
-        profile_picture = request.data.get('profile_picture')
-        user_profile.profile_picture = profile_picture
-        user_profile.save()
-        return Response({'message': 'Profile picture updated successfully'}, status=status.HTTP_200_OK)
-    
         
+  def put(self, request, id):
+        try:
+            file_object = Profile.objects.get(user=id)
+        except Profile.DoesNotExist:
+            return Response({"error": "Profile does not found"}, status=status.HTTP_404_NOT_FOUND)
 
+        file = request.data.get('file')
+        serializer = UserProfilePictureSerializer(file_object, data={'profile_picture': file}, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
 # File Create View
 class FileCreateView(APIView):
     parser_classes = [MultiPartParser, FormParser]
@@ -80,6 +83,15 @@ class FileDeleteView(generics.DestroyAPIView):
     serializer_class = FileSerializer
     permission_classes = [AllowAny]
     lookup_field = 'uid'
+
+  
+# File Favorite Update View
+class FileFavoriteUpdateView(generics.RetrieveUpdateAPIView):
+    queryset = File.objects.all()
+    serializer_class = FileFavoriteSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'uid'
+    
     
     
 # File Search View

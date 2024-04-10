@@ -45,8 +45,8 @@ export default function EditGetUser() {
         setUserData(data[0]);
         getUserProfile();
         setProfileData({
-          firstName: data[0].first_name,
-          lastName: data[0].last_name,
+          first_name: data[0].first_name,
+          last_name: data[0].last_name,
           email: data[0].email,
         });
       })
@@ -68,17 +68,19 @@ export default function EditGetUser() {
   // Change User Detail
   const ChangeUserDetail = (e) => {
     e.preventDefault();
-    console.log(profileData);
-    console.log(userid);
+    const formData = new FormData();
+    formData.append("first_name", profileData.first_name);
+    formData.append("last_name", profileData.last_name);
+    formData.append("email", profileData.email);
     api
-      .put(`/api/update_profile/${userid}/`, { profileData })
+      .put(`/api/update_profile/${userid}/`, formData)
       .then((res) => res.data)
       .then((data) => {
-        setUserProfile(data[0]);
-        setUserid(userId);
+        userId = userid
+        getUser()
       })
       .catch((err) => alert(err));
-  };
+    };
 
   // Change User Profile Picture
   const changeUserProfile = (e) => {
@@ -97,6 +99,7 @@ export default function EditGetUser() {
       .catch((err) => console.log(err));
   };
 
+  // Onchange Input Box
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProfileData({
@@ -115,7 +118,8 @@ export default function EditGetUser() {
 
   return (
     <>
-      {/* Hello world */}
+      <h2>EDIT</h2>
+
       <div className="container mt-4 mb-4 p-3 d-flex justify-content-center box">
         <div className="card p-4">
           <a
@@ -150,7 +154,7 @@ export default function EditGetUser() {
               <label htmlFor="">First Name</label>
               <input
                 type="text"
-                name="firstName"
+                name="first_name"
                 id=""
                 value={profileData.first_name}
                 onChange={handleInputChange}
@@ -158,7 +162,7 @@ export default function EditGetUser() {
               <label htmlFor="">Last Name</label>
               <input
                 type="text"
-                name="lastName"
+                name="last_name"
                 id=""
                 value={profileData.last_name}
                 onChange={handleInputChange}

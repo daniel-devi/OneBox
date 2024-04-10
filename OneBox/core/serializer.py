@@ -69,7 +69,13 @@ class FileSerializer(serializers.ModelSerializer):
     
     def get_file_path(self, obj):
         return obj.file.url
-        
+
+
+# File Model Favorite Serializer Class
+class FileFavoriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = File
+        fields = ["uid", "favorite"]        
         
 # Folder Model Serializer Class {A Api Format of the Model}
 class FolderSerializer(serializers.ModelSerializer):

@@ -1,9 +1,10 @@
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save, pre_save,pre_delete
 from django.dispatch import receiver
 # Core
 from .models import User,Profile,Folder,FileActivity,FolderActivity,File
 # External library
 import uuid
+import os
 
 # Create Your Signals Here 
 
@@ -14,6 +15,7 @@ def create_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
         Folder.objects.create(user=instance)
+        File.objects.create(user=instance, file='media/default/welcome.jpg')
         
 
 # Connects Signals to the Model      
@@ -30,6 +32,20 @@ def save_profile(sender, created, instance, **kwargs):
 post_save.connect(save_profile, sender=User)
 
 
+# Delete Profile From Database On Delete
+@receiver(pre_delete, sender=Profile) 
+def delete_profile(sender, instance, **kwargs):
+    # Function to Delete File From Database
+    def delete_file(file_path):
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            
+    file_path = instance.profile_picture.path
+    delete_file(file_path)
+
+
+# Connects Signals to the Model      
+pre_delete.connect(delete_profile, sender=Profile)
 
 
 # Create activity for each file 
@@ -53,6 +69,20 @@ def save_file(sender, created, instance, **kwargs):
 post_save.connect(save_file, sender=File)
 
 
+# Delete File From Database On Delete
+@receiver(pre_delete, sender=File) 
+def delete_file(sender, instance, **kwargs):
+    # Function to Delete File From Database
+    def delete_file(file_path):
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            
+    file_path = instance.file.path
+    delete_file(file_path)
+
+
+# Connects Signals to the Model      
+pre_delete.connect(delete_file, sender=File)
 
 
 # Create activity for each Folder 

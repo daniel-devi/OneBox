@@ -17,7 +17,6 @@ export default function ProfileEdit() {
         crossOrigin="anonymous"
       />
       <Navbar dashboard={"dashboard"} />
-      <h2>EDIT</h2>
       <EditGetUser/>
       <button onClick={handleLogoutClick} className="logout" >Logout</button>
     </div>
