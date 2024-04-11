@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/Profile-edit";
+import SharePage from "./pages/Share";
 // Dependencies Library
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
@@ -35,7 +36,7 @@ function App() {
                 <Dashboard />
               </ProtectedRoute>
             }
-          ></Route>
+          />
           <Route
             path="/profile"
             element={
@@ -52,7 +53,8 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="*" element={<NotFound></NotFound>}></Route>
+          <Route path="/share/:code" element={<SharePage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </>

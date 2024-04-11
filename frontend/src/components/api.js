@@ -13,10 +13,6 @@ api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    // Check if the request is of type 'multipart/form-data' before setting the header
-    if (config.headers["Content-Type"] === "multipart/form-data") {
-      config.headers["Content-Type"] = "multipart/form-data";
-    }
     return config;
   },
   (error) => {

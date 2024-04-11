@@ -87,14 +87,11 @@ export default function EditGetUser() {
     e.preventDefault();
     let Data = new FormData();
     Data.append("profile_picture", userProfileInput[0]);
-    console.log(userId);
 
     api
       .put(`/api/profile/change/${userId}`)
       .then((res) => res.data)
       .then((data) => {
-        console.log(data);
-        console.log(userProfileInput);
       })
       .catch((err) => console.log(err));
   };

@@ -66,7 +66,7 @@ function AuthForm({ route, method }) {
           setErrorStyle("red");
         }
       } else {
-        console.log(error.code);
+        console.log(error);
       }
     } finally {
       setLoading(false);
@@ -86,8 +86,7 @@ function AuthForm({ route, method }) {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
-          id={errorStyle}
-          required= "true"
+          required={true}
         />
         <input
           className="form-input"
@@ -95,12 +94,11 @@ function AuthForm({ route, method }) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
-          id={errorStyle}
-          required= "true"
+          required= {true}
         />
         <span id="error">{errorMessage}</span>
         {loading && <LoadingIndicator />}
-        <button className="form-button" type="submit">
+        <button className="form-button" type="submit" id={errorStyle}>
           {name}
         </button>
         {altLink}

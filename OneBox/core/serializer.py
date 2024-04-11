@@ -64,7 +64,7 @@ class UserProfilePictureSerializer(serializers.ModelSerializer):
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = File
-        fields = ["file","id","user", "uid", "file_name", "folder", "favorite", "date_created", "date_updated"]
+        fields = ["file","id","user", "uid", "file_name", "trash" , "folder", "favorite", "date_created", "date_updated"]
         extra_kwargs = {"date_created": {"read_only": True}, }
     
     def get_file_path(self, obj):
@@ -76,6 +76,14 @@ class FileFavoriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = File
         fields = ["uid", "favorite"]        
+        
+        
+# File Model Trash Serializer Class
+class FileTrashSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = File
+        fields = ["uid", "trash"]        
+        
         
 # Folder Model Serializer Class {A Api Format of the Model}
 class FolderSerializer(serializers.ModelSerializer):

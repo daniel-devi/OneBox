@@ -60,7 +60,6 @@ def user_directory_path(instance, filename):
     return "User_Files/user_{0}/{1}".format(instance.user.username, filename)
 
 def file_name(instance, filename):
-    # file will be uploaded to MEDIA_ROOT/user_name/<filename>
     return f"{filename}"
 
 class File(models.Model):
@@ -68,6 +67,7 @@ class File(models.Model):
     uid = models.UUIDField(editable=True, default=uuid.uuid4, unique=True)
     file_name = models.CharField(max_length=255, blank=True, null=True,)
     file = models.FileField(upload_to=user_directory_path)
+    trash = models.BooleanField(default=False)
     folder = models.ForeignKey(Folder, on_delete=models.CASCADE, null=True, blank=True)
     favorite = models.BooleanField(default=False)
     date_created = models.DateTimeField(default=timezone.now, editable=False)

@@ -111,7 +111,14 @@ class FileView(APIView):
         serializer = FileSerializer(file, many=True)
         return Response(serializer.data, status.HTTP_200_OK)
 
-# Only One Class
+# File View For Each
+class FileSelfView(generics.RetrieveAPIView):
+    queryset = File.objects.all()
+    serializer_class = FileSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'uid'
+    
+# Only One File Object the First
 class FileFirstView(APIView):
     
     def get(self, request):
