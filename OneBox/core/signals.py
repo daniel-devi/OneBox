@@ -15,6 +15,7 @@ def create_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
         Folder.objects.create(user=instance)
+        Folder.objects.create(user=instance ,folder_name="Trash")
         File.objects.create(user=instance, file='media/default/welcome.jpg')
         
 

@@ -9,7 +9,7 @@
   margin: 0;
 }
 
-.card {
+.profile-card {
   width: 350px;
   background: #ffffff33;
   -webkit-backdrop-filter: blur(8px);
@@ -27,7 +27,7 @@
   transition: all 0.5s;
 }
 
-.card:hover .image img {
+.profile-card:hover .image img {
   transform: scale(1.5);
 }
 

@@ -29,7 +29,7 @@ export default function SharePage() {
       });
   };
 
-  /// CopytoClipboard //////////////
+  /// Copy to Clipboard //////////////
   const copyToClipboard = (value) => {
     navigator.clipboard.writeText(value);
     alert("Link Copied to ClipBoard");
@@ -44,10 +44,8 @@ export default function SharePage() {
   return (
     <>
       <Navbar search="search" />
-          <div id="curve" key={fileData.uid} className="card">
-            <a href={`http://127.0.0.1:8000/${fileData.file}`}>
-              <embed src={`http://127.0.0.1:8000/${fileData.file}`} type="" />
-            </a>
+          <div id="curve" key={fileData.uid} className="share-card">
+            <embed src={`http://127.0.0.1:8000/${fileData.file}`} type="" id="embed-img"/>
             <div className="footer">
               <div className="connections">
                 <div className="connection download">
@@ -142,13 +140,14 @@ export default function SharePage() {
                 />
               </svg>
               <div className="info">
-                <div className="name">{fileData.file_name}</div>
+                <div className="name"><a href={`http://127.0.0.1:8000/${fileData.file}`}>{fileData.file_name}</a></div>
+
                 <div className="created">
                   {convertToRegularTime(fileData.date_created)}
                 </div>
               </div>
             </div>
-            <div className="card-blur" />
+            <div className="share-card-blur" />
           </div>
     </>
   );

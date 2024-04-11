@@ -5,81 +5,31 @@
   padding: 0;
 }
 
-small {
-  position: relative;
-  top: 100px;
-  color: black;
-  padding: 3px 0;
-}
-
-p {
-  font-size: 1rem;
-  padding: 100px 0;
-}
-
-.btn {
-  align-items: center;
-  background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
-  border: 0;
-  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
-  box-sizing: border-box;
-  color: #ffffff;
-  display: flex;
-  font-family: Phantomsans, sans-serif;
-  font-size: 18px;
-  justify-content: center;
-  padding: 3px;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.3s;
-  text-align: center;
-  margin: 0 auto;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
-}
-
-.btn:active,
-.btn:hover {
-  outline: 0;
-}
-
-.btn:hover span {
-  background: none;
-}
-
-.btn:active {
-  transform: scale(0.9);
-}
-
-
-.card {
-  position: relative;
-  border-radius: 8px;
+.embed-img{
+  width: 350px;
   height: 300px;
-  width: 150px;
+}
+.share-card {
+  position: relative;
+  display: block;
+  border-radius: 8px;
+  height: 400px;
+  width: 360px;
   margin: 10px auto;
-  background-repeat: no-repeat;
   box-shadow: 0 0 80px -10px black;
   overflow: hidden;
+  padding: 0 5px;
 }
 
-.card-blur {
+.share-card-blur {
   position: absolute;
   height: 100%;
   width: calc(100% + 1px);
-  background-color: black;
   opacity: 0;
   transition: opacity 0.15s ease-in;
 }
 
-.card:hover .card-blur {
+.share-card:hover .share-card-blur {
   opacity: 0.6;
 }
 
@@ -130,7 +80,7 @@ svg#curve {
   -o-transform: translateY(200px);
 }
 
-.card:hover .connection {
+.share-card:hover .connection {
   transform: translateY(0px);
 }
 
@@ -149,9 +99,10 @@ svg#curve {
   -moz-transform: translateY(250px);
   -ms-transform: translateY(250px);
   -o-transform: translateY(250px);
+  word-break: break-all;
 }
 
-.card:hover .info {
+.share-card:hover .info {
   transform: translateY(0px);
 }
 

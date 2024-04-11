@@ -65,7 +65,7 @@ export default function GetUser() {
       <h2>Profile</h2>
 
       <div className="container mt-4 mb-4 p-3 d-flex justify-content-center box">
-        <div className="card p-4">
+        <div className="profile-card p-4">
           <div className=" image d-flex flex-column justify-content-center align-items-center">
             <button className="btn btn-secondary">
               <img src={userProfile.profile_picture} height={100} width={100} />

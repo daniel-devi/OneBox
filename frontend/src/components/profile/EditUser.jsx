@@ -118,7 +118,7 @@ export default function EditGetUser() {
       <h2>EDIT</h2>
 
       <div className="container mt-4 mb-4 p-3 d-flex justify-content-center box">
-        <div className="card p-4">
+        <div className="profile-edit-card p-4">
           <a
             onClick={handleReturnProfileClick}
             style={{

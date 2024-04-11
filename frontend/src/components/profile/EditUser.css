@@ -1,7 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-}
+
 .body {
   background-color: #80808031;
   width: 100%;
@@ -9,7 +6,7 @@
   margin: 0;
 }
 
-.card {
+.profile-edit-card {
   width: 350px;
   background: #ffffff33;
   -webkit-backdrop-filter: blur(8px);
@@ -27,7 +24,7 @@
   transition: all 0.5s;
 }
 
-.card:hover .image img {
+.profile-edit-card:hover .image img {
   transform: scale(1.5);
 }
 

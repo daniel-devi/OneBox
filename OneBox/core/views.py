@@ -92,7 +92,13 @@ class FileFavoriteUpdateView(generics.RetrieveUpdateAPIView):
     permission_classes = [AllowAny]
     lookup_field = 'uid'
     
-    
+# File Folder Update View
+class FileFolderUpdateView(generics.RetrieveUpdateAPIView):
+    queryset = File.objects.all()
+    serializer_class = FileTrashSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'uid'
+
     
 # File Search View
 class FilesSearchView(generics.ListAPIView):
@@ -101,6 +107,15 @@ class FilesSearchView(generics.ListAPIView):
     def get_queryset(self):
         search_name = self.kwargs['search']
         return File.objects.filter(file_name__icontains=search_name)
+    
+# Get Favorite File Views
+class FilesSearchFavoriteView(generics.ListAPIView):
+    serializer_class = FileSerializer
+
+    def get_queryset(self):
+        search_name = self.kwargs['user']
+        files = File.objects.filter(user=search_name)
+        return files.filter(favorite=True)
     
     
 # File Api View
@@ -127,17 +142,18 @@ class FileFirstView(APIView):
         return Response(serializer.data, status.HTTP_200_OK)
 
 
-
 # Folder Create View
 class FolderCreateView(generics.CreateAPIView):
     queryset = Folder.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
     
-# Folder Model Api View
-class FolderView(APIView):
-
-    def get(self, request, format=None):
-        folder = Folder.objects.all()
-        serializer = FolderSerializer(folder)
-        return Response(serializer.data)
+# Folder Get Model object Api View
+class FolderGetView(generics.ListAPIView):
+    serializer_class = FolderSerializer
+    
+    def get_queryset(self):
+        search_name = self.kwargs['user']
+        folders =  Folder.objects.filter(user=search_name)
+        trash_folder = folders.filter(folder_name="Trash")
+        return trash_folder
