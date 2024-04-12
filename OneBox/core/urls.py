@@ -19,6 +19,11 @@ urlpatterns = [
     path('file/delete/<uuid:uid>', FileDeleteView.as_view()),
     path('file/download/<uuid:uid>', FileDownloadView.as_view()),
     path('search/file/<str:search>', FilesSearchView.as_view()),
+    path('folder/trash/<int:user>', FolderGetTrashView.as_view() ),
     path('folder/<int:user>', FolderGetView.as_view() ),
+    path('folder/no-trash/<int:user>', FolderGetNoTrashView.as_view() ),
     path('folder/create', FolderCreateView.as_view() ),
+    path('folder/update/favorite/<uuid:uid>', FolderFavoriteUpdateView.as_view()),
+    path('folder/delete/<uuid:uid>', FolderDeleteView.as_view()),
+    
 ]

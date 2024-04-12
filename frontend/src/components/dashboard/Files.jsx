@@ -102,7 +102,7 @@ export default function File() {
   const getTrashFolder = (fileUid) => {
     let userTrashId = files[0].user; // User Id Only for the Trash
     api
-      .get(`/api/folder/${userTrashId}`)
+      .get(`/api/folder/trash/${userTrashId}`)
       .then((res) => res.data)
       .then((data) => {
         trashFolderId = data[0].id;

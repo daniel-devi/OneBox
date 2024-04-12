@@ -4,8 +4,7 @@ export default function Folder() {
   return (
     <div>
       <Navbar folder={"folder"} dashboard={"dashboard"} />
-      <h2>Folder Page</h2>
-      <Folder />
+      <MyFolder />
     </div>
   );
 }

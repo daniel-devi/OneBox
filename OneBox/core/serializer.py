@@ -91,6 +91,13 @@ class FolderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Folder
         fields = ["id", "user", "uid", "folder_name", "parent_folder", "favorite", "description", "date_created", "date_updated"]
-        extra_kwargs = {"date_created": {"read_only": True}, }
-        
+        extra_kwargs = {"date_created": {"read_only": True}, 
+                        "folder_name": {"required":True}}
+       
 
+
+# File Model Favorite Serializer Class
+class FolderFavoriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Folder
+        fields = ["uid", "favorite"]      

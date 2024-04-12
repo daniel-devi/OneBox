@@ -141,7 +141,8 @@ class FileFirstView(APIView):
     
     def get(self, request):
         file = File.objects.filter(user=request.user).first()
-        serializer = FileSerializer(file)
+        first_file = file.first()
+        serializer = FileSerializer(first_file, many=False)
         return Response(serializer.data, status.HTTP_200_OK)
 
 # File Download View
@@ -157,12 +158,11 @@ class FileDownloadView(APIView):
 
 # Folder Create View
 class FolderCreateView(generics.CreateAPIView):
-    queryset = Folder.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = FolderSerializer
     permission_classes = [AllowAny]
     
-# Folder Get Model object Api View
-class FolderGetView(generics.ListAPIView):
+# Folder Get Model object Trash Folder Api View
+class FolderGetTrashView(generics.ListAPIView):
     serializer_class = FolderSerializer
     
     def get_queryset(self):
@@ -170,3 +170,35 @@ class FolderGetView(generics.ListAPIView):
         folders =  Folder.objects.filter(user=search_name)
         trash_folder = folders.filter(folder_name="Trash")
         return trash_folder
+
+# Folder Api
+class FolderGetView(generics.ListAPIView):
+    serializer_class = FolderSerializer
+    
+    def get_queryset(self):
+        search_name = self.kwargs['user']
+        folders =  Folder.objects.filter(user=search_name)
+        return folders
+
+class FolderGetNoTrashView(generics.ListAPIView):
+    serializer_class = FolderSerializer
+    
+    def get_queryset(self):
+        search_name = self.kwargs['user']
+        folders =  Folder.objects.filter(user=search_name)
+        folder_no_trash = folders.exclude(folder_name="Trash")
+        return folder_no_trash
+
+# Folder Favorite Update View
+class FolderFavoriteUpdateView(generics.RetrieveUpdateAPIView):
+    queryset = Folder.objects.all()
+    serializer_class = FolderFavoriteSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'uid'
+    
+# Folder Delete Serializer
+class FolderDeleteView(generics.DestroyAPIView):
+    queryset = Folder.objects.all()
+    serializer_class = FolderSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'uid'
