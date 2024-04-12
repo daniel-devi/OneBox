@@ -17,6 +17,7 @@ urlpatterns = [
     path('file/favorite/<int:user>', FilesSearchFavoriteView.as_view()),
     path('file/share/<uuid:uid>', FileSelfView.as_view()),
     path('file/delete/<uuid:uid>', FileDeleteView.as_view()),
+    path('file/download/<uuid:uid>', FileDownloadView.as_view()),
     path('search/file/<str:search>', FilesSearchView.as_view()),
     path('folder/<int:user>', FolderGetView.as_view() ),
     path('folder/create', FolderCreateView.as_view() ),

@@ -117,6 +117,8 @@ svg#curve {
 .file-card:hover .card-blur {
   opacity: 0.6;
 }
+
+
 .info {
   font-family: Inconsolata;
   position: relative;
@@ -132,7 +134,6 @@ svg#curve {
   -moz-transform: translateY(250px);
   -ms-transform: translateY(250px);
   -o-transform: translateY(250px);
-  user-select: none;
   pointer-events: none;
 }
 

@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.http import FileResponse
+from django.shortcuts import get_object_or_404
+from django.conf import settings
 # Core
 from .serializer import *
 from .models import File,Folder
@@ -13,6 +16,7 @@ from rest_framework import status
 from rest_framework import authentication, permissions
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 # Create your views here.
 
 
@@ -117,7 +121,6 @@ class FilesSearchFavoriteView(generics.ListAPIView):
         files = File.objects.filter(user=search_name)
         return files.filter(favorite=True)
     
-    
 # File Api View
 class FileView(APIView):
     
@@ -141,6 +144,16 @@ class FileFirstView(APIView):
         serializer = FileSerializer(file)
         return Response(serializer.data, status.HTTP_200_OK)
 
+# File Download View
+class FileDownloadView(APIView):
+    def get(self, request, uid):
+        instance = get_object_or_404(File, uid=uid)
+        file_path = instance.file.path
+        file_name = instance.file.name.split('/')[-1]
+        file_download = open(file_path, 'rb')
+        response = FileResponse(file_download)
+        response['Content-Disposition'] = f'attachment; filename="{file_name}"'
+        return response
 
 # Folder Create View
 class FolderCreateView(generics.CreateAPIView):

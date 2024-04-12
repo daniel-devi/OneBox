@@ -7,6 +7,7 @@ import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/Profile-edit";
 import SharePage from "./pages/Share";
+import Folder from "./pages/Folder";
 // Dependencies Library
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
@@ -34,6 +35,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/my-folders"
+            element={
+              <ProtectedRoute>
+                <Folder />
               </ProtectedRoute>
             }
           />

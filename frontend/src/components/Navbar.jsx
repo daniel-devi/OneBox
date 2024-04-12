@@ -5,10 +5,8 @@ import "../styles/Navbar.css";
 import api from "./api.js";
 // External Library
 
-export default function Navbar({ search, dashboard, searchFun }) {
+export default function Navbar({ search, dashboard, folder }) {
   const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState("");
-  let [searchResult, setSearchResult] = useState([]);
 
   ///////////////
   function handleReturnHomeClick() {
@@ -23,6 +21,10 @@ export default function Navbar({ search, dashboard, searchFun }) {
   ////////////////
   function handleGotoDashboardPageClick() {
     navigate("/dashboard");
+  }
+  ////////////////
+  function handleGotoFolderPageClick() {
+    navigate("/my-folders");
   }
   ////////////////////
   function handleGotoProfilePageClick() {
@@ -88,7 +90,11 @@ export default function Navbar({ search, dashboard, searchFun }) {
         <div className="links">
           <a onClick={handleReturnHomeClick}>Home</a>
 
-          <a>Folder</a>
+          {folder === "" ? (
+            <a onClick={handleGotoFolderPageClick}>Folder</a>
+          ) : (
+            ""
+          )}
 
           <a onClick={handleGotoProfilePageClick}>Profile</a>
         </div>

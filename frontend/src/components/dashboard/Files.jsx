@@ -80,6 +80,24 @@ export default function File() {
       })
       .catch((error) => console.log(error));
   };
+
+  /// File Download Function ///////////////////
+  const fileDownload = (fileUid) => {
+    api
+      .get(`/api/file/download/${fileUid}`)
+      .then((res) => res.data)
+      .then((data) => {
+        const url = window.URL.createObjectURL(new Blob([data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "OneBox.png");
+        document.body.appendChild(link);
+        link.click();
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   /// Get User Trash Folder ///////////////////
   const getTrashFolder = (fileUid) => {
     let userTrashId = files[0].user; // User Id Only for the Trash
@@ -140,6 +158,11 @@ export default function File() {
     window.open(value, "_blank");
   };
 
+  const openLink = (value) => {
+    alert("You will leave this page");
+    window.open(`http://127.0.0.1:8000${value}`, "_blank");
+  };
+
   // Navbar For DashBoard ///////////////
   function Navbar({ search, dashboard }) {
     const navigate = useNavigate();
@@ -153,6 +176,11 @@ export default function File() {
     /////////////////
     function handleReturnLoginClick() {
       navigate("/login");
+    }
+
+    ////////////////
+    function handleGotoFolderPageClick() {
+      navigate("/my-folders");
     }
 
     ////////////////
@@ -254,7 +282,7 @@ export default function File() {
           <div className="links">
             <a onClick={handleReturnHomeClick}>Home</a>
 
-            <a>Folder</a>
+            <a onClick={handleGotoFolderPageClick}>Folder</a>
 
             <a onClick={handlesProfilePageClick}>Profile</a>
           </div>
@@ -298,6 +326,13 @@ export default function File() {
                   />
                   <div className="footer">
                     <div className="connections">
+                      <div className="connection see">
+                        <img
+                          width={"30px"}
+                          onClick={() => openLink(data.file)}
+                          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABkklEQVR4nO2WvUoDQRSFPwsjoomk8wHEUpNgL9aKnVjYii/hT2FEIwgS8hBKgp1gY6ddYpGHWPNjKRKrRAZuYBj3zu5iRIs9cJs7557D3Duzs5AixT/AGlAGHoEOMJDoSO4UKE3ScBt4AUYxowls/cRwGXhIYOjGPbCU1HQX+AgR6wGHQAGYkygCR7Lm8t+BnTiGU8A5MAwRqQNZT61Za4TUGa0z0VZNa0rb6r5CRyPMfARUNY0rpaAXsVMXOaCvaF265APPITEztZERgVcgACqSs3Hs0dsfk1aBTw/RrNuohHBMzkbRozcAVgypFXEt3DYHIRyTs5GN0GwZUvsXjHMRmm1D2lCuzzgKMVp9kaDVQ2B9TKx6iObjYCMj5oHncJ149K5dsecJXacF4E3RegKm3YK8Z96NBB+QO89c81rhorwumnkuYqeaaVO0vZgFbhWBvnwczLs7L1GSmWrtvRHNWDAt21OuTtwIRCPOiL4hKy+LthutK+WEB1LFDLApr5c5/V3r16cruZpwDDdFCv4MXw/YJO5+W1zLAAAAAElFTkSuQmCC"
+                        ></img>
+                      </div>
                       <div className="connection like">
                         {data.favorite === false ? (
                           <img
@@ -328,7 +363,10 @@ export default function File() {
                         />
                       </div>
                       <div className="connection download">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAg0lEQVR4nO2UOwqAMBBE3zWsLCxsLLSw8vYGPYSghYVgIR4hErAQ/58EQfNgIBCYIRN24U9kgBwlTATImWzAAmkr+l5F1Yrplso7ATHQnTDvgeTuKyKg3TFXdyEP8YF6xbwBAjThAsXEXP2Ph2YcIB+3qjpb9CMuDJY8kDAdkBoo4CUG+aZ0PJTVTQsAAAAASUVORK5CYII=" />
+                        <img
+                          onClick={() => fileDownload(data.uid)}
+                          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAg0lEQVR4nO2UOwqAMBBE3zWsLCxsLLSw8vYGPYSghYVgIR4hErAQ/58EQfNgIBCYIRN24U9kgBwlTATImWzAAmkr+l5F1Yrplso7ATHQnTDvgeTuKyKg3TFXdyEP8YF6xbwBAjThAsXEXP2Ph2YcIB+3qjpb9CMuDJY8kDAdkBoo4CUG+aZ0PJTVTQsAAAAASUVORK5CYII="
+                        />
                       </div>
                       <div className="connection share">
                         <img
@@ -422,11 +460,7 @@ export default function File() {
                       />
                     </svg>
                     <div className="info">
-                      <div className="name">
-                        <a href={`http://127.0.0.1:8000/${data.file}`}>
-                          {data.file_name}
-                        </a>
-                      </div>
+                      <div className="name">{data.file_name}</div>
 
                       <div className="created">
                         {convertToRegularTime(data.date_created)}
@@ -439,8 +473,8 @@ export default function File() {
             </div>
           ))
         ) : (
-          <div style={{ position: "relative", top: "5%", }}>
-          <h1>No File</h1>
+          <div style={{ position: "relative", top: "5%" }}>
+            <h1>No File</h1>
           </div>
         )}
 
