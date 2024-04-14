@@ -25,5 +25,8 @@ urlpatterns = [
     path('folder/create', FolderCreateView.as_view() ),
     path('folder/update/favorite/<uuid:uid>', FolderFavoriteUpdateView.as_view()),
     path('folder/delete/<uuid:uid>', FolderDeleteView.as_view()),
+    path('folder/file-filter/<uuid:uid>', FolderFilterView.as_view()),
+    path('search/folder/<str:search>/<int:user>/', FolderSearchView.as_view()),
+    path('folder/favorite/<int:user>', FoldersSearchFavoriteView.as_view()),
     
 ]

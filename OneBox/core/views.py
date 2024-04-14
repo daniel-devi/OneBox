@@ -202,3 +202,31 @@ class FolderDeleteView(generics.DestroyAPIView):
     serializer_class = FolderSerializer
     permission_classes = [AllowAny]
     lookup_field = 'uid'
+
+# Folder Filter View
+class FolderFilterView(generics.ListAPIView):
+    serializer_class = FolderSerializer
+
+    def get_queryset(self):
+        search_name = self.kwargs['uid']
+        return File.objects.filter(uid=search_name)
+    
+    
+# Folder Search View
+class FolderSearchView(generics.ListAPIView):
+    serializer_class = FolderSerializer
+
+    def get_queryset(self):
+        search_name = self.kwargs['search']
+        user_id = self.kwargs['user']
+        folder = Folder.objects.filter(folder_name__icontains=search_name, user=user_id)
+        return  folder
+    
+# Get Favorite Folder Views
+class FoldersSearchFavoriteView(generics.ListAPIView):
+    serializer_class = FolderSerializer
+
+    def get_queryset(self):
+        search_name = self.kwargs['user']
+        folder = Folder.objects.filter(user=search_name)
+        return folder.filter(favorite=True)

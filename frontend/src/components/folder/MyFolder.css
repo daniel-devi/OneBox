@@ -10,6 +10,36 @@
 /*
  CSS for the main interaction
 */
+
+.search-folder {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  padding: 0;
+  width: 350px;
+}
+.search-folder button {
+  margin: 0 5px ;
+  position: relative;
+  padding: 2px 7px;
+}
+
+.search-folder input {
+  display: inline;
+}
+
+.filter-folder{
+  display: flex;
+  flex-direction: row;
+  margin: 7px auto;
+  width: 100px;
+}
+
+.tabSet {
+  margin: 5px auto;
+  padding: 5px;
+}
+
 .tabSet > input[type="radio"] {
   position: absolute;
   left: -200vw;
@@ -136,7 +166,7 @@ a:link {
 }
 
 .modal__description {
-  font-size: 1.0rem;
+  font-size: 1rem;
   font-style: italic;
   margin: 15px;
   padding: 0;
@@ -158,12 +188,12 @@ a:link {
   pointer-events: none;
 }
 
-#folder-input-label{
+#folder-input-label {
   margin-top: 10px;
   font-size: 1.2rem;
 }
 
-#create-folder-input{
+#create-folder-input {
   padding: 5px 10px;
   width: auto;
   font-size: 1.2rem;
@@ -253,4 +283,13 @@ a:link {
 .link-2:focus {
   border-color: hsla(0, 0%, 100%, 0.6);
   transform: translateY(-0.2rem);
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+.action {
+  margin: 5px 10px;
 }
